@@ -8,18 +8,24 @@
  */
 
 class Caesar_Content {
+	private $filters = array(
+		'wp_title',
+		'wp_title_rss',
+		'the_title',
+		'the_title_rss',
+		'the_content',
+		'the_content_feed',
+		'widget_title',
+		'widget_text',
+		'get_comment_text',
+		'bloginfo',
+		'the_excerpt',
+	);
+
 	public function __construct() {
-		add_filter( 'wp_title', array( $this, 'caesar_filer' ), 999, 1 );
-		add_filter( 'wp_title_rss', array( $this, 'caesar_filer' ), 999, 1 );
-		add_filter( 'the_title', array( $this, 'caesar_filer' ), 999, 1 );
-		add_filter( 'the_title_rss', array( $this, 'caesar_filer' ), 999, 1 );
-		add_filter( 'the_content', array( $this, 'caesar_filer' ), 999, 1 );
-		add_filter( 'the_content_feed', array( $this, 'caesar_filer' ), 999, 1 );
-		add_filter( 'widget_title', array( $this, 'caesar_filer' ), 999, 1 );
-		add_filter( 'widget_text', array( $this, 'caesar_filer' ), 999, 1 );
-		add_filter( 'get_comment_text', array( $this, 'caesar_filer' ), 999, 1 );
-		add_filter( 'bloginfo', array( $this, 'caesar_filer' ), 999, 1 );
-		add_filter( 'the_excerpt', array( $this, 'caesar_filer' ), 999, 1 );
+		foreach ( $this->filters as $filter_name ) {
+			add_filter( $filter_name, array( $this, 'caesar_filer' ), 999, 1 );
+		}
 	}
 
 	public function caesar_filer( $text ) {
